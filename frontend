@@ -1,0 +1,48 @@
+import React, { useState } from "react";
+import { ethers } from "ethers";
+import HealthcareABI from "./HealthcareRecords.json";
+
+const contractAddress = "DEPLOYED_CONTRACT_ADDRESS";
+
+function App() {
+  const [account, setAccount] = useState(null);
+  const [records, setRecords] = useState([]);
+
+  async function connectWallet() {
+    if (window.ethereum) {
+      const provider = new ethers.BrowserProvider(window.ethereum);
+      const accounts = await provider.send("eth_requestAccounts", []);
+      setAccount(accounts[0]);
+    }
+  }
+
+  async function getRecords() {
+    if (!account) return;
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    const signer = await provider.getSigner();
+    const contract = new ethers.Contract(contractAddress, HealthcareABI.abi, signer);
+    const recs = await contract.getPatientRecords(account);
+    setRecords(recs);
+  }
+
+  return (
+    <div className="App">
+      <h1>Healthcare Records</h1>
+      {!account ? (
+        <button onClick={connectWallet}>Connect Wallet</button>
+      ) : (
+        <div>
+          <p>Connected: {account}</p>
+          <button onClick={getRecords}>Get My Records</button>
+          <ul>
+            {records.map((r, i) => (
+              <li key={i}>{r.ipfsHash} - Uploaded by {r.uploadedBy}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default App;
