@@ -1,0 +1,18 @@
+# Healthcare Record Management on Blockchain
+
+## Overview
+This project secures patient records using blockchain technology.  
+- Patients can register and access their records.  
+- Doctors can upload new medical records.  
+- Records are stored using **IPFS hash** for off-chain storage.  
+
+## Architecture
+- **Smart Contract (Solidity)** → Stores patient info and IPFS hashes.
+- **Backend API (Node.js + Express)** → Acts as middleware between frontend & blockchain.
+- **Frontend (React + Web3.js/Ethers.js)** → Patient/Doctor portal.
+- **IPFS** → Off-chain record storage.
+
+## Workflow
+1. Patient registers on blockchain.
+2. Doctor adds medical record with IPFS hash.
+3. Patient retrieves own records securely.
