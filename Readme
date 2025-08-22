@@ -1,0 +1,27 @@
+# 🏥 Healthcare Record Management using Blockchain
+
+## 📌 Overview
+This project demonstrates how **Blockchain + IPFS** can be used to secure and manage healthcare records.  
+It ensures **data integrity, security, transparency, and patient privacy** by leveraging **Ethereum smart contracts** and **decentralized storage (IPFS)**.
+
+- Patients can **register and access** their records.  
+- Doctors can **upload new medical records** for patients.  
+- Medical files are stored on **IPFS**, while only the file hashes are stored on the blockchain to keep costs low and ensure immutability.  
+
+---
+
+## 🚀 Features
+✔️ Patient registration on blockchain  
+✔️ Doctor registration and record addition  
+✔️ Upload medical records securely (stored on IPFS)  
+✔️ Patients retrieve and view their records  
+✔️ Data is immutable, secure, and transparent  
+
+---
+
+## 🛠️ Tech Stack
+- **Smart Contracts** → Solidity  
+- **Blockchain Network** → Ethereum (Hardhat/Truffle, Sepolia/Ganache)  
+- **Storage** → IPFS  
+- **Backend API** → Node.js + Express + Ethers.js  
+- **Frontend** → React.js + Web3.js/Ethers.js  
