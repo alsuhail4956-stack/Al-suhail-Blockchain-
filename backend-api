@@ -1,0 +1,31 @@
+const express = require("express");
+const bodyParser = require("body-parser");
+const { ethers } = require("ethers");
+const contract = require("./services/blockchainService");
+
+const app = express();
+app.use(bodyParser.json());
+
+// Register patient
+app.post("/patient/register", async (req, res) => {
+  const { name, age, address } = req.body;
+  try {
+    let tx = await contract.registerPatient(name, age, { from: address });
+    res.json({ success: true, tx });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Add record
+app.post("/record/add", async (req, res) => {
+  const { patientAddress, ipfsHash } = req.body;
+  try {
+    let tx = await contract.addRecord(patientAddress, ipfsHash);
+    res.json({ success: true, tx });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.listen(4000, () => console.log("Backend API running on port 4000"));
